@@ -1,43 +1,43 @@
 {
-    "name": "Rojo template file",
+    "name": "Survival Game",
     "servePlaceIds": [
-      0
+      16768375133
     ],
     "tree": {
       "$className": "DataModel",
       "ReplicatedFirst": {
         "$className": "ReplicatedFirst",
-        "$ignoreUnknownInstances": true,
+        "$ignoreUnknownInstances": false,
         "$path": "src/ReplicatedFirst"
       },
       "ReplicatedStorage": {
         "$className": "ReplicatedStorage",
-        "$ignoreUnknownInstances": true,
+        "$ignoreUnknownInstances": false,
         "$path": "src/ReplicatedStorage"
       },
       "ServerScriptService": {
         "$className": "ServerScriptService",
-        "$ignoreUnknownInstances": true,
+        "$ignoreUnknownInstances": false,
         "$path": "src/ServerScriptService"
       },
       "ServerStorage": {
         "$className": "ServerStorage",
-        "$ignoreUnknownInstances": true,
+        "$ignoreUnknownInstances": false,
         "$path": "src/ServerStorage"
       },
       "StarterPlayer": {
         "$className": "StarterPlayer",
         "StarterCharacterScripts": {
           "$className": "StarterCharacterScripts",
-          "$ignoreUnknownInstances": true,
+          "$ignoreUnknownInstances": false,
           "$path": "src/StarterPlayer/StarterCharacterScripts"
         },
         "StarterPlayerScripts": {
           "$className": "StarterPlayerScripts",
-          "$ignoreUnknownInstances": true,
+          "$ignoreUnknownInstances": false,
           "$path": "src/StarterPlayer/StarterPlayerScripts"
         },
-        "$ignoreUnknownInstances": true
+        "$ignoreUnknownInstances": false
       }
     }
   }
