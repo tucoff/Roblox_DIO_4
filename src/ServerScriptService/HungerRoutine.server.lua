@@ -24,7 +24,7 @@ local function coreLoop(player: Player)
             PlayerHungerUpdated:FireClient(player, PlayerModule.GetHunger(player))
         end
 
-        wait(1)
+        wait(4)
     end
 end
 
