@@ -7,7 +7,10 @@ local Players = game:GetService("Players")
 -- Constants
 local PLAYER_DEFAULT_DATA = {
     hunger = 100,
-    inventory = {},
+    inventory = {
+        Stone = 0,
+        Gold = 0
+    },
     level = 0,
 }
 
@@ -18,10 +21,20 @@ local PlayerLoaded:BindableEvent = game:GetService("ServerStorage").BindableEven
 local PlayerUnloaded:BindableEvent = game:GetService("ServerStorage").BindableEvents.PlayerUnloaded
 local PlayerHungerUpdated:RemoteEvent = game:GetService("ReplicatedStorage").Network.PlayerHungerUpdated
 local PlayerInventoryUpdated:RemoteEvent = game:GetService("ReplicatedStorage").Network.PlayerInventoryUpdated
+local PlayerLevelChanged:RemoteEvent = game:GetService("ReplicatedStorage").Network.PlayerLevelChanged
 
 -- Functions
 function PlayerModule.IsLoaded(player: Player)
     return playersCached[player.UserId] and true or false
+end
+
+function PlayerModule.SetLevel(player: Player, level: number)
+    playersCached[player.UserId].level = level
+end
+
+function PlayerModule.GetLevel(player: Player): number
+    local level = playersCached[player.UserId].level
+    return level
 end
 
 function PlayerModule.SetHunger(player: Player, hunger: number)
@@ -41,7 +54,6 @@ function PlayerModule.GetHunger(player: Player): number
 
     return hunger
 end
-
 
 function PlayerModule.SetInventory(player: Player, inventory)
     playersCached[player.UserId].inventory = inventory
@@ -65,6 +77,8 @@ end
 
 local function onPlayerAdded(player: Player)
     player.CharacterAdded:Connect(function(_)
+        ---MANUAL RESET
+        --database:SetAsync(player.UserId, false)
         local data = database:GetAsync(player.UserId)
         if not data then
             data = PLAYER_DEFAULT_DATA
@@ -74,6 +88,7 @@ local function onPlayerAdded(player: Player)
         
         PlayerHungerUpdated:FireClient(player,PlayerModule.GetHunger(player))
         PlayerInventoryUpdated:FireClient(player,PlayerModule.GetInventory(player))
+        PlayerLevelChanged:FireClient(player,PlayerModule.GetLevel(player))
     end)
 end
 local function onPlayerRemoving(player: Player)
